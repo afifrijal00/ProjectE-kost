@@ -54,4 +54,9 @@ public function latestPayment()
 {
     return $this->hasOne(Payment::class)->latest();
 }
+
+public function complaints()
+{
+    return $this->hasMany(Complaint::class);
+}
 }

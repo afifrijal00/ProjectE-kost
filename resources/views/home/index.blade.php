@@ -113,11 +113,16 @@
     </div>
 
     <!-- CTA Banner -->
-    <div class="bg-[#30BF62] py-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <h2 class="text-3xl font-extrabold text-white mb-4">Ready to move in?</h2>
-            <p class="text-white opacity-90 mb-8 text-lg">Join dozens of happy tenants experiencing quality living today.</p>
-            <a href="{{ route('register') }}" class="bg-white text-[#012619] px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-gray-100 transition duration-200 inline-block">Create an Account</a>
+    @guest
+        <div class="bg-[#30BF62] py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+                <h2 class="text-3xl font-extrabold text-white mb-4">Ready to move in?</h2>
+                <p class="text-white opacity-90 mb-8 text-lg">Join dozens of happy tenants experiencing quality living today.
+                </p>
+                <a href="{{ route('register') }}"
+                    class="bg-white text-[#012619] px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-gray-100 transition duration-200 inline-block">Create
+                    an Account</a>
+            </div>
         </div>
-    </div>
+    @endguest
 @endsection

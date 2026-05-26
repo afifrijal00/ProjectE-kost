@@ -30,7 +30,7 @@ class AuthController extends Controller
             // Redirect berdasarkan role
             return $user->isAdmin()
                 ? redirect()->intended(route('dashboard.index'))
-                : redirect()->intended(route('home'));
+                : redirect()->intended(route('tenant.dashboard'));
         }
 
         return back()->withErrors([

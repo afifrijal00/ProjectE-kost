@@ -27,12 +27,47 @@
                     <span class="ml-2 font-bold text-xl text-[#012619]">eKost</span>
                 </div>
                 
-                <!-- Links (Desktop) -->
                 <div class="hidden sm:flex sm:space-x-8 items-center">
-                    <a href="{{ route('rooms') }}" class="text-gray-500 hover:text-[#035949] px-3 py-2 rounded-md font-medium transition duration-200">Rooms</a>
-                    <a href="#" class="text-gray-500 hover:text-[#035949] px-3 py-2 rounded-md font-medium transition duration-200">Facilities</a>
-                    <a href="#" class="text-gray-500 hover:text-[#035949] px-3 py-2 rounded-md font-medium transition duration-200">Contact</a>
-                    <a href="{{ route('login') }}" class="text-[#035949] border border-[#035949] hover:bg-[#035949] hover:text-white px-4 py-2 rounded-xl font-medium transition duration-200">Login</a>
+                    <a href="{{ route('home') }}"
+                        class="{{ request()->routeIs('home') ? 'text-[#035949] border-b-2 border-[#30BF62]' : 'text-gray-500 hover:text-[#035949]' }} px-3 py-2 rounded-md font-medium transition duration-200">Home</a>
+                    <a href="{{ route('rooms') }}"
+                        class="{{ request()->routeIs('rooms') ? 'text-[#035949] border-b-2 border-[#30BF62]' : 'text-gray-500 hover:text-[#035949]' }} px-3 py-2 rounded-md font-medium transition duration-200">Rooms</a>
+                    <a href="{{ route('contact') }}"
+                        class="{{ request()->routeIs('contact') ? 'text-[#035949] border-b-2 border-[#30BF62]' : 'text-gray-500 hover:text-[#035949]' }} px-3 py-2 rounded-md font-medium transition duration-200">Contact</a>
+                
+                    @auth
+                        {{-- User sudah login --}}
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="flex items-center space-x-2 focus:outline-none">
+                                <div
+                                    class="w-9 h-9 rounded-full bg-green-100 text-[#188C4A] flex items-center justify-center font-bold text-sm">
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                                </div>
+                                <span class="text-gray-700 font-medium text-sm">{{ Auth::user()->name }}</span>
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            {{-- Dropdown --}}
+                            <div x-show="open" @click.away="open = false" x-transition
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
+                                
+                                <hr class="my-1 border-gray-100">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition">
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        {{-- User belum login --}}
+                        <a href="{{ route('login') }}"
+                            class="text-[#035949] border border-[#035949] hover:bg-[#035949] hover:text-white px-4 py-2 rounded-xl font-medium transition duration-200">Login</a>
+                    @endauth
                 </div>
 
                 <!-- Mobile Menu Button -->
