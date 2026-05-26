@@ -2,7 +2,7 @@
 @section('title', 'Register - e-Kost')
 
 @section('content')
-<div class="min-h-[calc(100vh-64px)] flex bg-[#F2F2F2] py-12 px-4 sm:px-6 lg:px-8">
+<div class="min-h-[calc(100vh-64px)] flex bg-[#f5e6e6] py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl w-full mx-auto bg-white rounded-2xl shadow-md p-8 sm:p-10">
         <div class="text-center mb-10">
             <h1 class="text-3xl font-bold text-[#012619]">Create an Account</h1>
