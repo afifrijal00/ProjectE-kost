@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use Illuminate\Http\Request;
+=======
+use App\Models\Booking;
+use App\Models\Payment;
+use App\Models\Tenant;
+>>>>>>> 4ab8dc1b82b01b767d1d60ea3afe6d0957f457b1
 use Illuminate\Support\Facades\Auth;
 
 class TenantDashboardController extends Controller
 {
+<<<<<<< HEAD
     /**
      * Show the tenant dashboard.
      */
@@ -60,3 +67,35 @@ class TenantDashboardController extends Controller
         return view('tenant.dashboard', compact('tenant', 'room', 'lastPayment', 'nextDueDate', 'complaints'));
     }
 }
+=======
+    public function index()
+    {
+        $user = Auth::user();
+
+        // Cari tenant berdasarkan user login
+        $tenant = Tenant::where('user_id', $user->id)->first();
+
+        // Booking user
+        $booking = Booking::where('user_id', $user->id)
+            ->latest()
+            ->first();
+
+        // Payments tenant
+        $payments = collect();
+
+        if ($tenant) {
+            $payments = Payment::where('tenant_id', $tenant->id)
+                ->latest()
+                ->take(5)
+                ->get();
+        }
+
+        return view('dashboard.tenant', compact(
+            'user',
+            'tenant',
+            'booking',
+            'payments'
+        ));
+    }
+}
+>>>>>>> 4ab8dc1b82b01b767d1d60ea3afe6d0957f457b1

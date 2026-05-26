@@ -9,8 +9,11 @@ use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TenantPaymentController;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
+use App\Http\Controllers\TenantDashboardController;
+use App\Http\Controllers\TenantComplaintController;
 
 // ============================================================
 // 1. PUBLIC PAGES
@@ -18,7 +21,8 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/rooms', [HomeController::class, 'rooms'])->name('rooms');
 Route::get('/rooms/{id}', [HomeController::class, 'roomDetail'])->name('rooms.show');
-
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact', [HomeController::class, 'sendContact'])->name('contact.send');
 // ============================================================
 // 2. AUTH PAGES
 // ============================================================
@@ -33,14 +37,18 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::view('/email/verify', 'auth.verify-email')->name('verification.notice');
 
-    Route::get('/email/verify/{id}/{hash}', function (Request $request) {
-        return redirect()->route('home')->with('success', 'Email berhasil diverifikasi!');
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect()->route('home')->with('success', 'Email berhasil diverifikasi! Selamat datang.');
     })->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
 
     Route::post('/email/resend', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
         return back()->with('success', 'Link verifikasi telah dikirim ulang ke email Anda.');
     })->middleware('throttle:6,1')->name('verification.send');
+
+    Route::get('/dashboard', [TenantDashboardController::class, 'index'])
+    ->name('tenant.dashboard');
 });
 
 // ============================================================
@@ -75,14 +83,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // --- COMPLAINTS (Tenant) ---
-    Route::prefix('complaints')->name('complaints.')->group(function () {
-        Route::view('/',              'complaints.index')->name('index');
-        Route::view('/create',        'complaints.create')->name('create');
-        Route::view('/my-complaints', 'complaints.my-complaints')->name('my');
-        Route::get('/{id}', function ($id) {
-            return view('complaints.show');
-        })->name('show');
+    Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::prefix('tenant/complaints')->name('tenant.complaints.')->group(function () {
+
+        Route::get('/', [TenantComplaintController::class, 'index'])
+            ->name('index');
+
+        Route::get('/create', [TenantComplaintController::class, 'create'])
+            ->name('create');
+
+        Route::post('/store', [TenantComplaintController::class, 'store'])
+            ->name('store');
     });
+
+});
 
     // --- PROFILE (Tenant) ---
     Route::prefix('profile')->name('profile.')->group(function () {

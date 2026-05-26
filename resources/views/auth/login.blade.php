@@ -59,13 +59,7 @@
                 Don't have an account? <a href="{{ route('register') }}" class="text-[#188C4A] hover:text-[#035949] font-medium transition">Sign up</a>
             </p>
 
-            <div class="mt-8 bg-gray-50 rounded-xl p-4 border border-gray-200 text-sm">
-                <p class="font-bold text-gray-700 mb-2">Dummy Credentials (For Testing):</p>
-                <ul class="space-y-1 text-gray-600">
-                    <li><span class="font-semibold text-gray-800">Admin:</span> admin@kos.com / admin123</li>
-                    <li><span class="font-semibold text-gray-800">Tenant:</span> tenant@kos.com / tenant123</li>
-                </ul>
-            </div>
+            
         </div>
     </div>
 </div>
