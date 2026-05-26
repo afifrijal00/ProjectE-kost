@@ -144,32 +144,23 @@
     </div>
 
     <!-- CTA Banner -->
-<<<<<<< HEAD
-    <div class="bg-[#400000] py-20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center" data-aos="zoom-in">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Ready to move in?</h2>
-            <p class="text-gray-200 text-lg mb-8 max-w-2xl mx-auto">
+@guest
+    <div class="bg-[#30BF62] py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <h2 class="text-3xl font-extrabold text-white mb-4">
+                Ready to move in?
+            </h2>
+
+            <p class="text-white opacity-90 mb-8 text-lg">
                 Join dozens of happy tenants experiencing quality living today.
             </p>
-            <a href="{{ route('register') }}" 
-               class="inline-block bg-white text-[#400000] px-10 py-4 rounded-xl font-bold text-lg shadow-2xl hover:bg-[#F5E6E6] transition duration-300 transform hover:scale-105">
+
+            <a href="{{ route('register') }}"
+               class="bg-white text-[#012619] px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-gray-100 transition duration-200 inline-block">
                 Create an Account
             </a>
         </div>
     </div>
+@endguest
+
 @endsection
-=======
-    @guest
-        <div class="bg-[#30BF62] py-16">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-                <h2 class="text-3xl font-extrabold text-white mb-4">Ready to move in?</h2>
-                <p class="text-white opacity-90 mb-8 text-lg">Join dozens of happy tenants experiencing quality living today.
-                </p>
-                <a href="{{ route('register') }}"
-                    class="bg-white text-[#012619] px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-gray-100 transition duration-200 inline-block">Create
-                    an Account</a>
-            </div>
-        </div>
-    @endguest
-@endsection
->>>>>>> 4ab8dc1b82b01b767d1d60ea3afe6d0957f457b1
