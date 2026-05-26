@@ -12,26 +12,28 @@ class TenantComplaintController extends Controller
     /**
      * Menampilkan daftar complaint milik tenant
      */
-    public function index()
-    {
-        // Ambil data tenant berdasarkan user yang login
-        $tenant = Tenant::where('user_id', Auth::id())->first();
+   public function index()
+{
+    $tenant = Tenant::where('user_id', Auth::id())->first();
 
-        // Ambil semua complaint milik tenant
-        $complaints = Complaint::where('tenant_id', $tenant->id)
-            ->latest()
-            ->get();
-
-        // Kirim data ke view
-        return view('complaintTenant.index', compact('complaints'));
+    // Jika belum jadi tenant, tampilkan halaman kosong
+    if (!$tenant) {
+        return view('complaintsTenant.index', ['complaints' => collect()]);
     }
+
+    $complaints = Complaint::where('tenant_id', $tenant->id)
+        ->latest()
+        ->get();
+
+    return view('complaintsTenant.index', compact('complaints'));
+}
 
     /**
      * Menampilkan form tambah complaint
      */
     public function create()
     {
-        return view('complaintTenant.create');
+        return view('complaintsTenant.create');
     }
 
     /**
@@ -50,8 +52,11 @@ class TenantComplaintController extends Controller
         // Ambil data tenant yang sedang login
         $tenant = Tenant::where('user_id', Auth::id())->first();
 
-        // Default photo null
-        $photo = null;
+if (!$tenant) {
+    return redirect()->back()->with('error', 'Anda belum terdaftar sebagai tenant aktif.');
+}
+
+$photo = null;
 
         // Upload photo jika ada
         if ($request->hasFile('photo')) {

@@ -18,10 +18,10 @@
                 </p>
             </div>
 
-            <a href="{{ route('complaints.create') }}"
-                class="bg-[#400000] hover:bg-[#5c0000] text-white px-5 py-3 rounded-xl font-medium transition duration-200">
-                + Create Complaint
-            </a>
+        <a href="{{ route('tenant.complaints.create') }}"
+            class="bg-[#400000] hover:bg-[#5c0000] text-white px-5 py-3 rounded-xl font-medium transition duration-200">
+            + Create Complaint
+        </a>
         </div>
 
         @if(session('success'))
