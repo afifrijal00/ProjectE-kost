@@ -2,9 +2,9 @@
 @section('title', 'Login - e-Kost')
 
 @section('content')
-<div class="min-h-[calc(100vh-64px)] flex bg-[#F2F2F2]">
+<div class="min-h-[calc(100vh-64px)] flex bg-[#f5e6e6]">
     <!-- Brand Panel -->
-    <div class="hidden lg:flex lg:w-1/2 bg-[#012619] items-center justify-center p-12 relative overflow-hidden">
+    <div class="hidden lg:flex lg:w-1/2 bg-[#400000] items-center justify-center p-12 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#30BF62 1px, transparent 1px); background-size: 32px 32px;"></div>
         <div class="relative z-10 text-white max-w-lg">
             <h2 class="text-4xl font-bold mb-6">Welcome Back to e-Kost</h2>
@@ -42,9 +42,9 @@
                 <div>
                     <div class="flex justify-between items-center mb-1">
                         <label class="block text-sm font-medium text-gray-700">Password</label>
-                        <a href="{{ route('password.request') }}" class="text-xs text-[#188C4A] hover:text-[#035949] font-medium transition">Forgot password?</a>
+                        <a href="{{ route('password.request') }}" class="text-xs text-[#400000] hover:text-[#035949] font-medium transition">Forgot password?</a>
                     </div>
-                    <input type="password" name="password" placeholder="••••••••" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
+                    <input type="password" name="password" placeholder="123456" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
                 </div>
                 <div class="flex items-center">
                     <input type="checkbox" name="remember" id="remember" class="w-4 h-4 text-[#30BF62] border-gray-300 rounded focus:ring-[#30BF62]">
