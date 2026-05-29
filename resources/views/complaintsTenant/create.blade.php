@@ -2,7 +2,7 @@
 
 @section('title', 'Create Complaint')
 @section('page-title', 'Create Complaint')
-
+@use('Illuminate\Support\Facades\Storage')
 @section('content')
 
     <div class="max-w-3xl mx-auto">
@@ -13,7 +13,7 @@
                 Create Complaint
             </h1>
 
-            <form action="{{ route('complaints.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <form action="{{ route('tenant.complaints.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
 
                 @csrf
 

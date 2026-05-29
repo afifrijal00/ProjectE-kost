@@ -14,7 +14,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\TenantDashboardController;
 use App\Http\Controllers\TenantComplaintController;
-use App\Http\Controllers\Admin\ComplaintController;
+use App\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
 
 
 // ============================================================
@@ -84,22 +84,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{id}',        [TenantPaymentController::class, 'show'])       ->name('show');
     });
 
-    // --- COMPLAINTS (Tenant) ---
-    Route::middleware(['auth', 'verified'])->group(function () {
-
-    Route::prefix('tenant/complaints')->name('tenant.complaints.')->group(function () {
-
-        Route::get('/', [TenantComplaintController::class, 'index'])
-            ->name('index');
-
-        Route::get('/create', [TenantComplaintController::class, 'create'])
-            ->name('create');
-
-        Route::post('/store', [TenantComplaintController::class, 'store'])
-            ->name('store');
-    });
-
+   // --- COMPLAINTS (Tenant) ---
+Route::prefix('tenant/complaints')->name('tenant.complaints.')->group(function () {
+    Route::get('/',       [TenantComplaintController::class, 'index'])       ->name('index');
+    Route::get('/create', [TenantComplaintController::class, 'create'])      ->name('create');
+    Route::post('/',      [TenantComplaintController::class, 'store'])       ->name('store');
+    Route::get('/my',     [TenantComplaintController::class, 'myComplaints'])->name('my');
+    Route::get('/{id}',   [TenantComplaintController::class, 'show'])        ->name('show');
 });
+
 
     // --- PROFILE (Tenant) ---
     Route::prefix('profile')->name('profile.')->group(function () {
@@ -160,6 +153,14 @@ Route::prefix('complaints')->name('complaints.')->group(function () {
     Route::get('/{id}',       [AdminBookingController::class, 'show'])   ->name('show');
     Route::post('/{id}/approve', [AdminBookingController::class, 'approve'])->name('approve');
     Route::post('/{id}/reject',  [AdminBookingController::class, 'reject']) ->name('reject');
+});
+
+// Complaints Admin
+Route::prefix('complaints')->name('admin.complaints.')->group(function () {
+    Route::get('/',                    [AdminComplaintController::class, 'index'])       ->name('index');
+    Route::get('/{id}',                [AdminComplaintController::class, 'show'])        ->name('show');
+    Route::post('/{id}/status',        [AdminComplaintController::class, 'updateStatus'])->name('status');
+    Route::post('/{id}/reply',         [AdminComplaintController::class, 'reply'])       ->name('reply');
 });
 
         // Reminders

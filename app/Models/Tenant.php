@@ -59,4 +59,5 @@ public function complaints()
 {
     return $this->hasMany(Complaint::class);
 }
+
 }
