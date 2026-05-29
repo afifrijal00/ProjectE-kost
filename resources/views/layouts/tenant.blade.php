@@ -36,7 +36,7 @@
         @php
                     $navItems = [
                         ['route' => 'tenant.dashboard', 'label' => 'Dashboard',    'icon' => 'layout-dashboard'],
-                        ['route' => 'booking.status',   'label' => 'My Booking',   'icon' => 'calendar-check'],
+                        ['route' => 'booking.status',   'label' => 'My Bookingg',   'icon' => 'calendar-check'],
                         ['route' => 'payments.my',      'label' => 'Payments',     'icon' => 'receipt'],
                         ['route' => 'tenant.complaints.index', 'label' => 'Complaints', 'icon' => 'message-report'],
                         ['route' => 'profile.index',    'label' => 'Profile',      'icon' => 'user'],
