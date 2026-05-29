@@ -14,10 +14,21 @@ class Complaint extends Model
         'photo',
         'status',
         'admin_response',
+        'responded_by',
+        'responded_at',
+    ];
+
+    protected $casts = [
+        'responded_at' => 'datetime',
     ];
 
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    public function respondedBy()
+    {
+        return $this->belongsTo(User::class, 'responded_by');
     }
 }
