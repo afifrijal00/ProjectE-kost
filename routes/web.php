@@ -14,6 +14,8 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\TenantDashboardController;
 use App\Http\Controllers\TenantComplaintController;
+use App\Http\Controllers\Admin\ComplaintController;
+
 
 // ============================================================
 // 1. PUBLIC PAGES
@@ -110,6 +112,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ============================================================
     Route::middleware(['admin'])->prefix('admin')->group(function () {
 
+
         // Dashboard
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
@@ -140,6 +143,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/',    [AdminPaymentController::class, 'index']) ->name('index');
             Route::get('/{id}',[AdminPaymentController::class, 'show'])  ->name('show');
         });
+
+       // Complaint admins
+Route::prefix('complaints')->name('complaints.')->group(function () {
+
+    Route::get('/', [ComplaintController::class, 'index'])
+        ->name('index');
+
+    Route::get('/{id}', [ComplaintController::class, 'show'])
+        ->name('show');
+
+});
 
         Route::prefix('bookings')->name('admin.bookings.')->group(function () {
     Route::get('/',           [AdminBookingController::class, 'index'])  ->name('index');

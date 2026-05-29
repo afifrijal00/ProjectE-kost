@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="bg-[#012619] py-20">
+    <div class="bg-[#400000] py-20">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
             <h1 class="text-4xl md:text-5xl font-extrabold mb-6">
                 Hubungi Kami

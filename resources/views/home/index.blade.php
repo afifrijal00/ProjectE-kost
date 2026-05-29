@@ -145,7 +145,7 @@
 
     <!-- CTA Banner -->
 @guest
-    <div class="bg-[#30BF62] py-16">
+    <div class="bg-[#400000] py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <h2 class="text-3xl font-extrabold text-white mb-4">
                 Ready to move in?

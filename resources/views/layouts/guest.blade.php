@@ -21,19 +21,19 @@
             <div class="flex justify-between h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <svg class="h-8 w-8 text-[#30BF62]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="h-8 w-8 text-[#400000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                     </svg>
-                    <span class="ml-2 font-bold text-xl text-[#012619]">eKost</span>
+                    <span class="ml-2 font-bold text-xl text-[#012619]">E-Kost</span>
                 </div>
                 
                 <div class="hidden sm:flex sm:space-x-8 items-center">
                     <a href="{{ route('home') }}"
-                        class="{{ request()->routeIs('home') ? 'text-[#035949] border-b-2 border-[#30BF62]' : 'text-gray-500 hover:text-[#035949]' }} px-3 py-2 rounded-md font-medium transition duration-200">Home</a>
+                        class="{{ request()->routeIs('home') ? 'text-[#400000] border-b-2 border-[#400000]' : 'text-gray-500 hover:text-[#400000]' }} px-3 py-2 rounded-md font-medium transition duration-200">Home</a>
                     <a href="{{ route('rooms') }}"
-                        class="{{ request()->routeIs('rooms') ? 'text-[#035949] border-b-2 border-[#30BF62]' : 'text-gray-500 hover:text-[#035949]' }} px-3 py-2 rounded-md font-medium transition duration-200">Rooms</a>
+                        class="{{ request()->routeIs('rooms') ? 'text-[#400000] border-b-2 border-[#400000]' : 'text-gray-500 hover:text-[#400000]' }} px-3 py-2 rounded-md font-medium transition duration-200">Rooms</a>
                     <a href="{{ route('contact') }}"
-                        class="{{ request()->routeIs('contact') ? 'text-[#035949] border-b-2 border-[#30BF62]' : 'text-gray-500 hover:text-[#035949]' }} px-3 py-2 rounded-md font-medium transition duration-200">Contact</a>
+                        class="{{ request()->routeIs('contact') ? 'text-[#400000] border-b-2 border-[#400000]' : 'text-gray-500 hover:text-[#400000]' }} px-3 py-2 rounded-md font-medium transition duration-200">Contact</a>
                 
                     @auth
                         {{-- User sudah login --}}

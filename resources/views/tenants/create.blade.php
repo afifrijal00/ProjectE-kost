@@ -30,17 +30,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                         <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="+62..."
                             class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-[#30BF62] focus:border-[#30BF62]">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Identity Card (NIK)</label>
-                        <input type="text" name="nik" value="{{ old('nik') }}" placeholder="16 digit NIK" maxlength="16"
-                            class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-[#30BF62] focus:border-[#30BF62]">
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Upload KTP</label>
-                        <input type="file" name="ktp_photo" accept="image/*"
-                            class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-[#188C4A] hover:file:bg-green-100 transition">
-                    </div>
+                    </div>  
                 </div>
             </div>
 
