@@ -48,23 +48,34 @@ class AuthController extends Controller
     }
 
     public function register(RegisterRequest $request)
-    {
-        $validated = $request->validated();
+{
+    $validated = $request->validated();
 
-        $user = User::create([
-            'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-            'role' => 'tenant', // Default role
-        ]);
+    $user = User::create([
+        'name'     => trim($validated['first_name'] . ' ' . $validated['last_name']),
+        'email'    => $validated['email'],
+        'password' => Hash::make($validated['password']),
+        'role'     => 'tenant',
+    ]);
 
-        // Trigger email verification event
-        event(new Registered($user));
+    // Buat data tenant kosong otomatis
+    \App\Models\Tenant::create([
+        'user_id'    => $user->id,
+        'name'       => trim($validated['first_name'] . ' ' . $validated['last_name']),
+        'email'      => $validated['email'],
+        'phone'      => '-',
+        'nik'        => null,
+        'duration'   => 0,
+        'start_date' => now(),
+        'end_date'   => now(),
+        'status'     => 'pending',
+    ]);
 
-        // Login user setelah register (opsional, bisa di-comment jika ingin wajib verifikasi dulu)
-        Auth::login($user);
+    // Trigger email verification
+    event(new Registered($user));
+    Auth::login($user);
 
-        return redirect()->route('verification.notice')
-            ->with('success', 'Registrasi berhasil! Silakan verifikasi email Anda.');
-    }
+    return redirect()->route('verification.notice')
+    ->with('success', 'Registrasi berhasil! Silakan verifikasi email Anda.');
+}
 }

@@ -44,19 +44,31 @@ class BookingController extends Controller
         $startDate = Carbon::parse($request->start_date);
         $endDate   = $startDate->copy()->addMonths($booking->duration);
 
-        // Buat tenant baru
-        $tenant = Tenant::create([
-            'user_id'    => $booking->user_id,
-            'room_id'    => $booking->room_id,
-            'name'       => $booking->user->name,
-            'email'      => $booking->user->email,
-            'phone'      => $booking->user->phone ?? '-',
-            'nik'        => '-',
-            'duration'   => $booking->duration,
-            'start_date' => $startDate,
-            'end_date'   => $endDate,
-            'status'     => 'active',
-        ]);
+        // Update tenant yang sudah ada atau buat baru
+$tenant = Tenant::where('user_id', $booking->user_id)->first();
+
+if ($tenant) {
+    $tenant->update([
+        'room_id'    => $booking->room_id,
+        'duration'   => $booking->duration,
+        'start_date' => $startDate,
+        'end_date'   => $endDate,
+        'status'     => 'active',
+    ]);
+} else {
+    $tenant = Tenant::create([
+        'user_id'    => $booking->user_id,
+        'room_id'    => $booking->room_id,
+        'name'       => $booking->user->name,
+        'email'      => $booking->user->email,
+        'phone'      => $booking->user->phone ?? '-',
+        'nik'        => '-',
+        'duration'   => $booking->duration,
+        'start_date' => $startDate,
+        'end_date'   => $endDate,
+        'status'     => 'active',
+    ]);
+}
 
         // Update status room jadi occupied
         $booking->room->update(['status' => 'occupied']);

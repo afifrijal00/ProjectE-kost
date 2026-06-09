@@ -28,8 +28,8 @@
             <a href="{{ route('dashboard.index') }}"
                 class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
                 {{ request()->routeIs('dashboard.index')
-                    ? 'text-white bg-[#6d0000] border-[#ad3333]'
-                    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
 
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -43,8 +43,8 @@
             <a href="{{ route('dashboard.rooms') }}"
                 class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
                 {{ request()->routeIs('dashboard.rooms*')
-                    ? 'text-white bg-[#6d0000] border-[#ad3333]'
-                    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
 
                 <svg class="w-5 h-5 group-hover:text-[#f5f5f5] transition duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,8 +60,8 @@
             <a href="{{ route('tenants.index') }}"
                 class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
                 {{ request()->routeIs('tenants.*')
-                    ? 'text-white bg-[#6d0000] border-[#ad3333]'
-                    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
 
                 <svg class="w-5 h-5 group-hover:text-[#f5f5f5] transition duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,8 +77,8 @@
             <a href="{{ route('admin.bookings.index') }}"
                 class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
                 {{ request()->routeIs('admin.bookings.*')
-                    ? 'text-white bg-[#6d0000] border-[#ad3333]'
-                    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
 
                 <svg class="w-5 h-5 group-hover:text-[#f5f5f5] transition duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,8 +94,8 @@
             <a href="{{ route('admin.payments.index') }}"
                 class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
                 {{ request()->routeIs('admin.payments.*')
-                    ? 'text-white bg-[#6d0000] border-[#ad3333]'
-                    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
 
                 <svg class="w-5 h-5 group-hover:text-[#f5f5f5] transition duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,23 +108,22 @@
             </a>
 
             <!-- Complaints -->
-            <a href="{{ route('admin.complaints.index') }}"
-                class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
-                {{ request()->routeIs('complaints.*')
-                    ? 'text-white bg-[#6d0000] border-[#ad3333]'
-                    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
-
+            <a href="{{ route('admin.complaints.index') }}" class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
+               {{ request()->routeIs('admin.complaints.*')
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
                 <svg class="w-5 h-5 group-hover:text-[#f5f5f5] transition duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
+
 
                 <span class="mx-4 font-medium">Complaints</span>
 
                 @php
-                    $unreadComplaints = \App\Models\Complaint::where('is_read', false)->count();
+$unreadComplaints = \App\Models\Complaint::where('is_read', false)->count();
                 @endphp
 
                 <span id="complaint-badge"
@@ -139,8 +138,8 @@
             <a href="{{ route('reminders.index') }}"
                 class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
                 {{ request()->routeIs('reminders.*')
-                    ? 'text-white bg-[#6d0000] border-[#ad3333]'
-                    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
 
                 <svg class="w-5 h-5 group-hover:text-[#f5f5f5] transition duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,8 +155,8 @@
             <a href="{{ route('reports.index') }}"
                 class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
                 {{ request()->routeIs('reports.*')
-                    ? 'text-white bg-[#6d0000] border-[#ad3333]'
-                    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
 
                 <svg class="w-5 h-5 group-hover:text-[#f5f5f5] transition duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">

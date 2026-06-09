@@ -46,7 +46,8 @@
         <nav class="flex-1 px-3 py-4 flex flex-col gap-1">
             @foreach($navItems as $item)
                 @php
-                    $isActive = request()->routeIs($item['route']) || request()->routeIs(explode('.', $item['route'])[0] . '.*');
+                    $isActive = request()->routeIs($item['route'])
+                        || request()->routeIs($item['route'] . '.*');
                 @endphp
                 <a
                     href="{{ route($item['route']) }}"

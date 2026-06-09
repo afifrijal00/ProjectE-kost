@@ -13,14 +13,15 @@ class RegisterRequest extends FormRequest
     }
 
     public function rules(): array
-    {
-        return [
-            'first_name' => ['required', 'string', 'max:100'],
-            'last_name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-        ];
-    }
+{
+    return [
+        'first_name' => ['required', 'string', 'max:100'],
+        'last_name'  => ['required', 'string', 'max:100'],
+        'email'      => ['required', 'email', 'max:255', 'unique:users,email'],
+        'phone'      => ['required', 'string', 'max:20'],
+        'password'   => ['required', 'confirmed', Password::defaults()],
+    ];
+}
 
     public function messages(): array
     {

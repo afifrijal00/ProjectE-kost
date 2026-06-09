@@ -15,7 +15,10 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\TenantDashboardController;
 use App\Http\Controllers\TenantComplaintController;
 use App\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
-
+use App\Http\Controllers\Admin\ReminderController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\ChatbotController;
 
 // ============================================================
 // 1. PUBLIC PAGES
@@ -60,6 +63,8 @@ Route::post('/payments/webhook', [TenantPaymentController::class, 'webhook'])->n
 
 Route::post('/booking/webhook', [BookingController::class, 'webhook'])->name('booking.webhook');
 
+Route::post('/chatbot/message', [App\Http\Controllers\ChatbotController::class, 'message'])->name('chatbot.message');
+
 
 
 // ============================================================
@@ -78,11 +83,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // --- PAYMENTS (Tenant) ---
     Route::prefix('payments')->name('payments.')->group(function () {
-        Route::get('/',            [TenantPaymentController::class, 'index'])      ->name('index');
-        Route::get('/my-payments', [TenantPaymentController::class, 'myPayments']) ->name('my');
-        Route::get('/{id}/pay',    [TenantPaymentController::class, 'pay'])        ->name('pay');
-        Route::get('/{id}',        [TenantPaymentController::class, 'show'])       ->name('show');
-    });
+    Route::get('/',            [TenantPaymentController::class, 'index'])      ->name('index');
+    Route::get('/my-payments', [TenantPaymentController::class, 'myPayments']) ->name('my');
+    Route::get('/{id}/pay',    [TenantPaymentController::class, 'pay'])        ->name('pay');
+    Route::get('/{id}',        [TenantPaymentController::class, 'show'])       ->name('show');
+});
 
    // --- COMPLAINTS (Tenant) ---
 Route::prefix('tenant/complaints')->name('tenant.complaints.')->group(function () {
@@ -95,10 +100,14 @@ Route::prefix('tenant/complaints')->name('tenant.complaints.')->group(function (
 
 
     // --- PROFILE (Tenant) ---
-    Route::prefix('profile')->name('profile.')->group(function () {
-        Route::view('/',      'profile.index')->name('index');
-        Route::view('/edit',  'profile.edit')->name('edit');
-    });
+    
+
+Route::prefix('profile')->name('profile.')->group(function () {
+    Route::get('/',               [ProfileController::class, 'index'])          ->name('index');
+    Route::get('/edit',           [ProfileController::class, 'edit'])           ->name('edit');
+    Route::put('/update',         [ProfileController::class, 'update'])         ->name('update');
+    Route::put('/update-password',[ProfileController::class, 'updatePassword']) ->name('update.password');
+});
 
     // ============================================================
     // ADMIN ONLY ROUTES
@@ -165,15 +174,17 @@ Route::prefix('complaints')->name('admin.complaints.')->group(function () {
 
         // Reminders
         Route::prefix('reminders')->name('reminders.')->group(function () {
-            Route::view('/',         'reminders.index')->name('index');
-            Route::view('/settings', 'reminders.settings')->name('settings');
-        });
+    Route::get('/',         [ReminderController::class, 'index'])   ->name('index');
+    Route::get('/settings', [ReminderController::class, 'settings'])->name('settings');
+    Route::post('/send',    [ReminderController::class, 'send'])    ->name('send');
+});
 
-        // Reports
         Route::prefix('reports')->name('reports.')->group(function () {
-            Route::view('/',          'reports.index')->name('index');
-            Route::view('/income',    'reports.income')->name('income');
-            Route::view('/occupancy', 'reports.occupancy')->name('occupancy');
+    Route::get('/',          [ReportController::class, 'index'])     ->name('index');
+    Route::get('/income/export-pdf', [ReportController::class, 'exportIncomePdf'])->name('income.export-pdf');
+    Route::get('/income',    [ReportController::class, 'income'])    ->name('income');
+    Route::get('/occupancy/export-pdf',  [ReportController::class, 'exportOccupancyPdf'])->name('occupancy.export-pdf');
+    Route::get('/occupancy', [ReportController::class, 'occupancy']) ->name('occupancy');
         });
     });
 });

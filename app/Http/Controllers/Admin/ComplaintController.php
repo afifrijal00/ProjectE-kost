@@ -59,9 +59,8 @@ class ComplaintController extends Controller
             'responded_at' => now(),
         ]);
 
-        return redirect()
-            ->route('complaints.show', $id)
-            ->with('success', 'Status complaint berhasil diupdate!');
+        return redirect()->route('admin.complaints.show', $id)
+    ->with('success', 'Status complaint berhasil diupdate!');
     }
 
     public function reply(Request $request, $id)
@@ -78,8 +77,7 @@ class ComplaintController extends Controller
             'responded_at'   => now(),
         ]);
 
-        return redirect()
-            ->route('complaints.show', $id)
-            ->with('success', 'Balasan berhasil dikirim!');
+        return redirect()->route('admin.complaints.show', $id)
+    ->with('success', 'Balasan berhasil dikirim!');
     }
 }

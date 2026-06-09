@@ -26,9 +26,7 @@ class TenantPaymentController extends Controller
     // INDEX - tenant lihat tagihan sendiri
 public function index()
 {
-    $tenant   = Tenant::where('user_id', Auth::id())->firstOrFail();
-    $payments = Payment::where('tenant_id', $tenant->id)->latest()->paginate(10);
-    return view('payments.index', compact('payments', 'tenant'));
+    return redirect()->route('payments.my');
 }
 
 // MY PAYMENTS - halaman khusus tenant
