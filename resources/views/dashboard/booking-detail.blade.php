@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@use('Illuminate\Support\Facades\Storage')
 @section('title', 'Booking Detail - e-Kost')
 @section('header_title', 'Booking Detail')
 
@@ -66,8 +67,15 @@
                     </div>
                     <div>
                         <span class="text-sm text-gray-500 block mb-1">DP Status</span>
-                        <span
-                            class="font-medium text-gray-900">{{ $booking->dp_status == 'paid' ? '✅ Paid' : '⏳ Pending' }}</span>
+                        <span class="font-medium text-gray-900">
+                            @if($booking->dp_status == 'paid')
+                                ✅ Paid
+                            @elseif($booking->dp_status == 'verify')
+                                🔍 Menunggu Verifikasi
+                            @else
+                                ⏳ Pending
+                            @endif
+                        </span>
                     </div>
                     <div>
                         <span class="text-sm text-gray-500 block mb-1">Requested Start Date</span>
@@ -85,6 +93,54 @@
                     @endif
                 </div>
             </div>
+
+            {{-- Bukti Transfer DP --}}
+            @if($booking->proof_photo)
+                <div class="bg-white rounded-2xl shadow-md p-6">
+                    <h3 class="font-bold text-[#012619] text-lg mb-4 pb-2 border-b border-gray-100">Bukti Transfer DP</h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-4">
+                        @if($booking->sender_name)
+                            <div>
+                                <span class="text-sm text-gray-500 block mb-1">Nama Pengirim</span>
+                                <span class="font-medium text-gray-900">{{ $booking->sender_name }}</span>
+                            </div>
+                        @endif
+                        @if($booking->transfer_date)
+                            <div>
+                                <span class="text-sm text-gray-500 block mb-1">Tanggal Transfer</span>
+                                <span class="font-medium text-gray-900">{{ $booking->transfer_date->format('d M Y') }}</span>
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <svg class="w-8 h-8 text-[#188C4A] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-gray-900">Transfer Proof</p>
+                                    <p class="text-xs text-gray-500">{{ basename($booking->proof_photo) }}</p>
+                                </div>
+                            </div>
+                            <a href="{{ Storage::url($booking->proof_photo) }}" target="_blank"
+                                class="text-[#035949] hover:underline text-sm font-medium">View Image</a>
+                        </div>
+                        <img src="{{ Storage::url($booking->proof_photo) }}" alt="Proof"
+                            class="w-full max-h-64 object-contain rounded-xl border border-gray-200 bg-white">
+                    </div>
+                </div>
+            @elseif($booking->status == 'dp_paid' || $booking->dp_status == 'pending')
+                <div class="bg-white rounded-2xl shadow-md p-6">
+                    <h3 class="font-bold text-[#012619] text-lg mb-4 pb-2 border-b border-gray-100">Bukti Transfer DP</h3>
+                    <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 text-center text-gray-400 text-sm">
+                        Belum ada bukti pembayaran diupload.
+                    </div>
+                </div>
+            @endif
         </div>
 
         {{-- Right: Actions --}}

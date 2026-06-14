@@ -15,17 +15,14 @@ class PaymentController extends Controller
     {
         $query = Payment::with(['tenant', 'tenant.room']);
 
-        // Auto update overdue
         Payment::where('status', 'pending')
             ->where('due_date', '<', now())
             ->update(['status' => 'overdue']);
 
-        // Filter status
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        // Search
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('invoice_number', 'like', '%' . $request->search . '%')
@@ -35,10 +32,10 @@ class PaymentController extends Controller
             });
         }
 
-        $payments         = $query->latest()->paginate(10)->withQueryString();
-        $pendingCount     = Payment::where('status', 'verify')->count();
-        $verifiedTotal    = Payment::where('status', 'paid')->whereMonth('verified_at', now()->month)->sum('amount');
-        $overdueCount     = Payment::where('status', 'overdue')->count();
+        $payments      = $query->latest()->paginate(10)->withQueryString();
+        $pendingCount  = Payment::where('status', 'verify')->count();
+        $verifiedTotal = Payment::where('status', 'paid')->whereMonth('verified_at', now()->month)->sum('amount');
+        $overdueCount  = Payment::where('status', 'overdue')->count();
 
         return view('payments.index', compact('payments', 'pendingCount', 'verifiedTotal', 'overdueCount'));
     }
@@ -50,43 +47,34 @@ class PaymentController extends Controller
         return view('payments.show', compact('payment'));
     }
 
-// Tidak ada verify manual, semua otomatis via Midtrans webhook
+    // APPROVE
+    public function approve($id)
+    {
+        $payment = Payment::findOrFail($id);
+        $payment->update([
+            'status'      => 'paid',
+            'verified_at' => now(),
+            'verified_by' => Auth::id(),
+        ]);
 
-//     // VERIFY PAGE
-//     public function verifyPage($id)
-//     {
-//         $payment = Payment::with(['tenant', 'tenant.room'])->findOrFail($id);
-//         return view('payments.verify', compact('payment'));
-//     }
+        return redirect()->route('payments.show', $id)
+            ->with('success', 'Pembayaran berhasil diverifikasi!');
+    }
 
-//     // APPROVE
-//     public function approve($id)
-//     {
-//         $payment = Payment::findOrFail($id);
-//         $payment->update([
-//             'status'      => 'paid',
-//             'verified_at' => now(),
-//             'verified_by' => Auth::id(),
-//         ]);
+    // REJECT
+    public function reject(Request $request, $id)
+    {
+        $request->validate([
+            'notes' => 'required|string|max:255',
+        ]);
 
-//         return redirect()->route('payments.index')
-//             ->with('success', 'Pembayaran berhasil diverifikasi!');
-//     }
+        $payment = Payment::findOrFail($id);
+        $payment->update([
+            'status' => 'pending',
+            'notes'  => $request->notes,
+        ]);
 
-//     // REJECT
-//     public function reject(Request $request, $id)
-//     {
-//         $request->validate([
-//             'notes' => 'required|string|max:255',
-//         ]);
-
-//         $payment = Payment::findOrFail($id);
-//         $payment->update([
-//             'status' => 'pending',
-//             'notes'  => $request->notes,
-//         ]);
-
-//         return redirect()->route('payments.index')
-//             ->with('success', 'Pembayaran ditolak, tenant perlu upload ulang.');
-//     }
+        return redirect()->route('payments.index')
+            ->with('success', 'Pembayaran ditolak, tenant perlu upload ulang.');
+    }
 }

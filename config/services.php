@@ -48,4 +48,9 @@ return [
     'key' => env('GEMINI_API_KEY'),
 ],
 
+'fonnte' => [
+    'token'        => env('FONNTE_TOKEN'),
+    'admin_number' => env('FONNTE_ADMIN_NUMBER'),
+],
+
 ];

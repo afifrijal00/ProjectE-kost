@@ -4,25 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Room;
-use App\Models\Tenant;
-use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Midtrans\Config;
-use Midtrans\Snap;
-use Midtrans\Notification;
+use App\Services\WhatsappService;
 
 class BookingController extends Controller
 {
-    public function __construct()
-{
-    \Midtrans\Config::$serverKey    = env('MIDTRANS_SERVER_KEY');
-    \Midtrans\Config::$clientKey    = env('MIDTRANS_CLIENT_KEY');
-    \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
-    \Midtrans\Config::$isSanitized  = env('MIDTRANS_IS_SANITIZED', true);
-    \Midtrans\Config::$is3ds        = env('MIDTRANS_IS_3DS', true);
-}
-
     // CREATE - tampilkan form booking
     public function create(Request $request)
     {
@@ -30,7 +17,7 @@ class BookingController extends Controller
         return view('booking.create', compact('room'));
     }
 
-    // STORE - simpan booking & generate snap token DP
+    // STORE - simpan booking, lanjut ke halaman QRIS
     public function store(Request $request)
     {
         $request->validate([
@@ -39,60 +26,87 @@ class BookingController extends Controller
             'start_date' => 'required|date|after_or_equal:today',
         ]);
 
-        $room      = Room::findOrFail($request->room_id);
-        $dpAmount  = $room->price * 0.5; // DP 50%
-        $orderId   = 'DP-' . time() . '-' . Auth::id();
+        $room     = Room::findOrFail($request->room_id);
+        $dpAmount = $room->price * 0.5; // DP 50%
 
-        // Buat booking
         $booking = Booking::create([
-            'user_id'           => Auth::id(),
-            'room_id'           => $room->id,
-            'booking_code'      => Booking::generateBookingCode(),
-            'duration'          => $request->duration,
-            'start_date'        => $request->start_date,
-            'dp_amount'         => $dpAmount,
-            'midtrans_order_id' => $orderId,
-            'status'            => 'pending',
-            'dp_status'         => 'pending',
+            'user_id'      => Auth::id(),
+            'room_id'      => $room->id,
+            'booking_code' => Booking::generateBookingCode(),
+            'duration'     => $request->duration,
+            'start_date'   => $request->start_date,
+            'dp_amount'    => $dpAmount,
+            'status'       => 'pending',
+            'dp_status'    => 'pending',
         ]);
-
-        // Generate Snap Token Midtrans
-        $params = [
-            'transaction_details' => [
-                'order_id'     => $orderId,
-                'gross_amount' => (int) $dpAmount,
-            ],
-            'customer_details' => [
-                'first_name' => Auth::user()->name,
-                'email'      => Auth::user()->email,
-            ],
-            'item_details' => [
-                [
-                    'id'       => 'DP-ROOM-' . $room->id,
-                    'price'    => (int) $dpAmount,
-                    'quantity' => 1,
-                    'name'     => 'DP Sewa Kamar ' . $room->room_number . ' (' . $request->duration . ' bulan)',
-                ]
-            ],
-        ];
-
-        $snapToken = Snap::getSnapToken($params);
-        $booking->update(['snap_token' => $snapToken]);
 
         return redirect()->route('booking.upload-dp', ['booking' => $booking->id]);
     }
 
-    // UPLOAD DP - tampilkan halaman bayar DP
+    // UPLOAD DP - tampilkan halaman QRIS & rekening
     public function uploadDp($bookingId)
     {
-        $booking = Booking::with('room')->findOrFail($bookingId);
+        $booking = Booking::with('room')
+            ->where('user_id', Auth::id())
+            ->findOrFail($bookingId);
+
         return view('booking.upload-dp', compact('booking'));
     }
+
+    // UPLOAD DP PROOF FORM
+    public function uploadDpProof($bookingId)
+    {
+        $booking = Booking::with('room')
+            ->where('user_id', Auth::id())
+            ->findOrFail($bookingId);
+
+        return view('booking.upload-dp-proof', compact('booking'));
+    }
+
+    // STORE DP PROOF
+    public function storeDpProof(Request $request, $bookingId)
+{
+    $booking = Booking::with('room')->where('user_id', Auth::id())->findOrFail($bookingId);
+
+    $request->validate([
+        'sender_name'   => 'required|string|max:255',
+        'transfer_date' => 'required|date',
+        'proof_photo'   => 'required|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    $path = $request->file('proof_photo')->store('booking-proofs', 'public');
+
+    $booking->update([
+        'sender_name'   => $request->sender_name,
+        'transfer_date' => $request->transfer_date,
+        'proof_photo'   => $path,
+        'dp_status'     => 'verify',
+        'status'        => 'dp_paid',
+    ]);
+
+    // Kirim notifikasi WA ke admin
+    WhatsappService::sendToAdmin(
+        "🔔 *Bukti DP Booking Baru*\n\n" .
+        "Booking Code: #{$booking->booking_code}\n" .
+        "Penyewa: " . Auth::user()->name . "\n" .
+        "Kamar: {$booking->room->room_number}\n" .
+        "DP: Rp " . number_format($booking->dp_amount, 0, ',', '.') . "\n" .
+        "Pengirim: {$request->sender_name}\n" .
+        "Tanggal Transfer: {$request->transfer_date}\n\n" .
+        "Cek di dashboard admin: " . route('admin.bookings.show', $booking->id)
+    );
+
+    return redirect()->route('booking.confirmation', $booking->id)
+        ->with('success', 'Bukti DP berhasil dikirim! Menunggu verifikasi admin.');
+}
 
     // CONFIRMATION - halaman sukses
     public function confirmation($bookingId)
     {
-        $booking = Booking::with('room')->findOrFail($bookingId);
+        $booking = Booking::with('room')
+            ->where('user_id', Auth::id())
+            ->findOrFail($bookingId);
+
         return view('booking.confirmation', compact('booking'));
     }
 
@@ -103,37 +117,7 @@ class BookingController extends Controller
             ->where('user_id', Auth::id())
             ->latest()
             ->firstOrFail();
+
         return view('booking.status', compact('booking'));
-    }
-
-    // WEBHOOK - terima notifikasi DP dari Midtrans
-    public function webhook(Request $request)
-    {
-        $notification = new Notification();
-
-        $orderId           = $notification->order_id;
-        $transactionStatus = $notification->transaction_status;
-        $fraudStatus       = $notification->fraud_status;
-        $paymentType       = $notification->payment_type;
-
-        $booking = Booking::where('midtrans_order_id', $orderId)->firstOrFail();
-
-        if ($transactionStatus == 'capture' && $fraudStatus == 'accept') {
-            $booking->update([
-                'dp_status'      => 'paid',
-                'status'         => 'dp_paid',
-                'payment_method' => $paymentType,
-            ]);
-        } elseif ($transactionStatus == 'settlement') {
-            $booking->update([
-                'dp_status'      => 'paid',
-                'status'         => 'dp_paid',
-                'payment_method' => $paymentType,
-            ]);
-        } elseif (in_array($transactionStatus, ['cancel', 'deny', 'expire'])) {
-            $booking->update(['status' => 'pending', 'dp_status' => 'pending']);
-        }
-
-        return response()->json(['status' => 'ok']);
     }
 }

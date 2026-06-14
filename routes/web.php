@@ -59,9 +59,9 @@ Route::middleware('auth')->group(function () {
 // ============================================================
 // WEBHOOK MIDTRANS (di luar auth, tidak perlu CSRF)
 // ============================================================
-Route::post('/payments/webhook', [TenantPaymentController::class, 'webhook'])->name('payments.webhook');
+// Route::post('/payments/webhook', [TenantPaymentController::class, 'webhook'])->name('payments.webhook');
 
-Route::post('/booking/webhook', [BookingController::class, 'webhook'])->name('booking.webhook');
+// Route::post('/booking/webhook', [BookingController::class, 'webhook'])->name('booking.webhook');
 
 Route::post('/chatbot/message', [App\Http\Controllers\ChatbotController::class, 'message'])->name('chatbot.message');
 
@@ -74,19 +74,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // --- BOOKING (Tenant) ---
     Route::prefix('booking')->name('booking.')->group(function () {
-    Route::get('/create',               [BookingController::class, 'create'])      ->name('create');
-    Route::post('/store',               [BookingController::class, 'store'])       ->name('store');
-    Route::get('/upload-dp/{booking}',  [BookingController::class, 'uploadDp'])   ->name('upload-dp');
+    Route::get('/create',                [BookingController::class, 'create'])      ->name('create');
+    Route::post('/store',                [BookingController::class, 'store'])       ->name('store');
+    Route::get('/upload-dp/{booking}',   [BookingController::class, 'uploadDp'])    ->name('upload-dp');
+    Route::get('/upload-dp/{booking}/proof', [BookingController::class, 'uploadDpProof'])->name('upload-dp-proof');
+    Route::post('/upload-dp/{booking}/proof', [BookingController::class, 'storeDpProof']) ->name('store-dp-proof');
     Route::get('/confirmation/{booking}',[BookingController::class, 'confirmation'])->name('confirmation');
-    Route::get('/status',               [BookingController::class, 'status'])      ->name('status');
+    Route::get('/status',                [BookingController::class, 'status'])      ->name('status');
 });
 
     // --- PAYMENTS (Tenant) ---
     Route::prefix('payments')->name('payments.')->group(function () {
-    Route::get('/',            [TenantPaymentController::class, 'index'])      ->name('index');
-    Route::get('/my-payments', [TenantPaymentController::class, 'myPayments']) ->name('my');
-    Route::get('/{id}/pay',    [TenantPaymentController::class, 'pay'])        ->name('pay');
-    Route::get('/{id}',        [TenantPaymentController::class, 'show'])       ->name('show');
+    Route::get('/',                   [TenantPaymentController::class, 'index'])      ->name('index');
+    Route::get('/my-payments',        [TenantPaymentController::class, 'myPayments']) ->name('my');
+    Route::get('/{id}/pay',           [TenantPaymentController::class, 'qris'])       ->name('pay');
+    Route::get('/{id}/upload-proof',  [TenantPaymentController::class, 'uploadProof'])->name('upload-proof');
+    Route::post('/{id}/upload-proof', [TenantPaymentController::class, 'storeProof']) ->name('store-proof');
+    Route::get('/{id}',               [TenantPaymentController::class, 'show'])       ->name('show');
 });
 
    // --- COMPLAINTS (Tenant) ---
@@ -142,9 +146,11 @@ Route::prefix('profile')->name('profile.')->group(function () {
 
         // Payments (Admin)
         Route::prefix('payments')->name('admin.payments.')->group(function () {
-            Route::get('/',    [AdminPaymentController::class, 'index']) ->name('index');
-            Route::get('/{id}',[AdminPaymentController::class, 'show'])  ->name('show');
-        });
+    Route::get('/',           [AdminPaymentController::class, 'index'])  ->name('index');
+    Route::get('/{id}',       [AdminPaymentController::class, 'show'])   ->name('show');
+    Route::post('/{id}/approve', [AdminPaymentController::class, 'approve'])->name('approve');
+    Route::post('/{id}/reject',  [AdminPaymentController::class, 'reject']) ->name('reject');
+});
 
        // Complaint admins
 Route::prefix('complaints')->name('complaints.')->group(function () {

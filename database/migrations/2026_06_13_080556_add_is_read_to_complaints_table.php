@@ -9,15 +9,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('complaints', function (Blueprint $table) {
-            $table->foreignId('responded_by')->nullable()->constrained('users')->nullOnDelete()->after('admin_response');
-            $table->timestamp('responded_at')->nullable()->after('responded_by');
+            $table->boolean('is_read')->default(false);
         });
     }
 
     public function down(): void
     {
         Schema::table('complaints', function (Blueprint $table) {
-            $table->dropColumn(['responded_by', 'responded_at']);
+            $table->dropColumn('is_read');
         });
     }
 };
