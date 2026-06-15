@@ -28,10 +28,22 @@
     >
         {{-- Logo --}}
         <div class="px-5 py-6 border-b border-white/10">
-            <div class="text-[22px] font-bold text-white tracking-tight">eKost.</div>
-            <div class="text-[11px] text-white/50 mt-0.5 uppercase tracking-widest">Tenant Portal</div>
-        </div>
+    <div class="flex items-center gap-3">
+        <img
+            src="{{ asset('logo.png') }}"
+            alt="E-Kost Logo"
+            class="w-10 h-10 object-contain">
 
+        <div>
+            <div class="text-[22px] font-bold text-white tracking-tight">
+                eKost.
+            </div>
+            <div class="text-[11px] text-white/50 uppercase tracking-widest">
+                Tenant Portal
+            </div>
+        </div>
+    </div>
+</div>
         {{-- Nav links --}}
         @php
                     $navItems = [

@@ -14,7 +14,7 @@
 
             <!-- Section: Personal Info -->
             <div>
-                <h3 class="text-lg font-semibold text-[#035949] mb-4">Personal Information</h3>
+                <h3 class="text-lg font-semibold text-[#400000] mb-4">Personal Information</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
@@ -38,7 +38,7 @@
 
             <!-- Section: Room Assignment -->
             <div>
-                <h3 class="text-lg font-semibold text-[#035949] mb-4">Room Assignment & Contract</h3>
+                <h3 class="text-lg font-semibold text-[#400000] mb-4">Room Assignment & Contract</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Assign Room</label>
@@ -82,7 +82,7 @@
             <div class="flex justify-end gap-3 pt-4">
                 <button type="button" onclick="window.history.back()" class="border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 rounded-xl px-5 py-2 font-medium transition duration-200">Cancel</button>
                 <button type="submit"
-                    class="bg-[#30BF62] text-white hover:bg-[#188C4A] rounded-xl px-5 py-2 font-medium transition duration-200 shadow-sm">Save
+                    class="bg-[#ad3333] text-white hover:bg-[#400000] rounded-xl px-5 py-2 font-medium transition duration-200 shadow-sm">Save
                     Tenant</button>
             </div>
         </form>

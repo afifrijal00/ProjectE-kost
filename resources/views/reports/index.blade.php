@@ -15,7 +15,7 @@
             </div>
             <h2 class="text-xl font-bold text-[#012619] mb-2">Income Report</h2>
             <p class="text-gray-500 mb-8 max-w-sm">Detailed financial records of all monthly rent payments, deposits, and overall revenue generated.</p>
-            <a href="{{ route('reports.income') }}" class="mt-auto w-full max-w-xs bg-[#30BF62] text-white hover:bg-[#188C4A] rounded-xl px-4 py-3 font-semibold transition duration-200">
+            <a href="{{ route('reports.income') }}" class="mt-auto w-full max-w-xs bg-[#ad3333] text-white hover:bg-[#400000] rounded-xl px-4 py-3 font-semibold transition duration-200">
                 View Income Report
             </a>
         </div>
@@ -27,7 +27,7 @@
             </div>
             <h2 class="text-xl font-bold text-[#012619] mb-2">Occupancy Report</h2>
             <p class="text-gray-500 mb-8 max-w-sm">Analyze room availability, active tenant numbers, and calculate the overall occupancy rate for your property.</p>
-            <a href="{{ route('reports.occupancy') }}" class="mt-auto w-full max-w-xs border border-[#035949] text-[#035949] hover:bg-[#035949] hover:text-white rounded-xl px-4 py-3 font-semibold transition duration-200">
+            <a href="{{ route('reports.occupancy') }}" class="mt-auto w-full max-w-xs border border-[#ad3333] text-[#400000] hover:bg-[#400000] hover:text-white rounded-xl px-4 py-3 font-semibold transition duration-200">
                 View Occupancy Report
             </a>
         </div>

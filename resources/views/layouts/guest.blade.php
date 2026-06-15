@@ -21,11 +21,14 @@
             <div class="flex justify-between h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <svg class="h-8 w-8 text-[#400000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                    </svg>
-                    <span class="ml-2 font-bold text-xl text-[#012619]">E-Kost</span>
-                </div>
+    <img src="{{ asset('logo.png') }}"
+         alt="E-Kost Logo"
+         class="h-10 w-auto">
+
+    <span class="ml-2 font-bold text-xl text-[#012619]">
+        E-Kost
+    </span>
+</div>
                 
                 <div class="hidden sm:flex sm:space-x-8 items-center">
                     <a href="{{ route('home') }}"
@@ -42,7 +45,7 @@
                         </a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="text-[#035949] border border-[#035949] hover:bg-[#035949] hover:text-white px-4 py-2 rounded-xl font-medium transition duration-200">Login</a>
+                            class="text-[#400000] border border-[#400000] hover:bg-[#400000] hover:text-white px-4 py-2 rounded-xl font-medium transition duration-200">Login</a>
                     @endauth
                 </div>
 

@@ -46,7 +46,7 @@
 
         <div class="overflow-x-auto">
             <table class="w-full whitespace-nowrap">
-                <thead class="bg-[#012619] text-white text-left text-sm uppercase font-semibold">
+                <thead class="bg-[#400000] text-white text-left text-sm uppercase font-semibold">
                     <tr>
                         <th class="px-6 py-4">Invoice ID</th>
                         <th class="px-6 py-4">Tenant</th>

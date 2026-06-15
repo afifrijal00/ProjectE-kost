@@ -7,8 +7,12 @@
     <div class="hidden lg:flex lg:w-1/2 bg-[#400000] items-center justify-center p-12 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#30BF62 1px, transparent 1px); background-size: 32px 32px;"></div>
         <div class="relative z-10 text-white max-w-lg">
-            <h2 class="text-4xl font-bold mb-6">Welcome Back to e-Kost</h2>
-            <p class="text-lg text-gray-300">Manage your property efficiently or access your tenant dashboard to view payments and contracts seamlessly.</p>
+            <img
+    src="{{ asset('logo.png') }}"
+    alt="E-Kost Logo"
+    class="h-40 w-auto mx-auto mb-10 drop-shadow-2xl">
+            <h2 class="text-4xl font-bold mb-6">Selamat Datang Kembali ke E-Kost Red Dragon</h2>
+            <p class="text-lg text-gray-300">Wujudkan pengalaman tinggal yang lebih praktis dengan akses mudah ke pembayaran, pengaduan, perpanjangan sewa, dan informasi kos dalam satu dashboard.</p>
             <div class="mt-12 space-y-4">
                 <div class="flex items-center space-x-3 text-sm text-gray-300">
                     <svg class="w-6 h-6 text-[#30BF62]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>

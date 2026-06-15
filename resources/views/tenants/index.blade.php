@@ -27,7 +27,7 @@
                         <option value="past" {{ request('status') == 'past' ? 'selected' : '' }}>Past</option>
                     </select>
                     <form id="filter-form" method="GET" action="{{ route('tenants.index') }}"></form>
-                    <a href="{{ route('tenants.create') }}" class="bg-[#30BF62] text-white hover:bg-[#188C4A] rounded-xl px-4 py-2 text-sm font-medium transition shadow-sm flex items-center">
+                    <a href="{{ route('tenants.create') }}" class="bg-[#ad3333] text-white hover:bg-[#400000] rounded-xl px-4 py-2 text-sm font-medium transition shadow-sm flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg> Add Tenant
                     </a>
                 </div>
@@ -36,7 +36,7 @@
             <!-- Table -->
             <div class="overflow-x-auto">
                 <table class="w-full whitespace-nowrap">
-                    <thead class="bg-[#012619] text-white text-left text-sm uppercase font-semibold">
+                    <thead class="bg-[#400000] text-white text-left text-sm uppercase font-semibold">
                         <tr>
                             <th class="px-6 py-4 rounded-tl-xl sm:rounded-none">Tenant Name</th>
                             <th class="px-6 py-4">Room</th>

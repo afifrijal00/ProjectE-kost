@@ -17,7 +17,7 @@
     </form>
         </div>
 
-        <a href="{{ route('dashboard.rooms.form') }}" class="bg-[#30BF62] text-white hover:bg-[#188C4A] rounded-xl px-4 py-2 font-medium transition duration-200 shadow-sm flex items-center w-full sm:w-auto justify-center">
+        <a href="{{ route('dashboard.rooms.form') }}" class="bg-[#ad3333] text-white hover:bg-[#400000] rounded-xl px-4 py-2 font-medium transition duration-200 shadow-sm flex items-center w-full sm:w-auto justify-center">
             <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             Add New Room
         </a>

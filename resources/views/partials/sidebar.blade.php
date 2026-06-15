@@ -2,23 +2,19 @@
     class="absolute z-40 flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-[#400000] border-r border-[#035949] transition-transform duration-300 ease-in-out lg:static lg:translate-x-0">
 
     <!-- Logo area -->
-    <div class="flex items-center justify-between lg:justify-center mb-6 px-2">
-        <a href="{{ route('dashboard.index') }}" class="flex items-center text-white space-x-2">
-            <svg class="w-8 h-8 text-[#ad3333]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            <span class="text-2xl font-bold tracking-wider">eKost.</span>
-        </a>
+<div class="flex items-center justify-between lg:justify-center mb-6 px-2">
+    <a href="{{ route('dashboard.index') }}" class="flex items-center text-white space-x-2">
+        <img src="{{ asset('logo.png') }}" alt="Salora Roll" class="w-8 h-8 object-contain">
+        <span class="text-2xl font-bold tracking-wider">eKost.</span>
+    </a>
 
-        <button @click="sidebarOpen = false"
-            class="lg:hidden text-gray-300 hover:text-white rounded-md p-1 transition duration-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#30BF62]">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-    </div>
+    <button @click="sidebarOpen = false"
+        class="lg:hidden text-gray-300 hover:text-white rounded-md p-1 transition duration-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#30BF62]">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+</div>
 
     <!-- Navigation Links -->
     <div class="flex flex-col flex-1 mt-6">
