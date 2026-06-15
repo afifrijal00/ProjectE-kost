@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\ReminderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\ExtensionController;
+use App\Http\Controllers\Admin\ExtensionController as AdminExtensionController;
 
 // ============================================================
 // 1. PUBLIC PAGES
@@ -113,6 +115,18 @@ Route::prefix('profile')->name('profile.')->group(function () {
     Route::put('/update-password',[ProfileController::class, 'updatePassword']) ->name('update.password');
 });
 
+// --- EXTENSIONS (Tenant) ---
+Route::prefix('extensions')->name('extensions.')->group(function () {
+    Route::get('/create',           [ExtensionController::class, 'create'])     ->name('create');
+    Route::post('/store',           [ExtensionController::class, 'store'])      ->name('store');
+    Route::get('/{id}/qris',         [ExtensionController::class, 'qris'])       ->name('qris');
+    Route::get('/{id}/upload-proof', [ExtensionController::class, 'uploadProof'])->name('upload-proof');
+    Route::post('/{id}/upload-proof',[ExtensionController::class, 'storeProof']) ->name('store-proof');
+});
+
+// --- CHECKOUT REQUEST (Tenant) ---
+Route::post('/checkout/request', [ExtensionController::class, 'requestCheckout'])->name('checkout.request');
+
     // ============================================================
     // ADMIN ONLY ROUTES
     // ============================================================
@@ -194,6 +208,17 @@ Route::prefix('complaints')->name('admin.complaints.')->group(function () {
         });
     });
 });
+
+// Extensions (Admin)
+Route::prefix('extensions')->name('admin.extensions.')->group(function () {
+    Route::get('/',           [AdminExtensionController::class, 'index'])  ->name('index');
+    Route::get('/{id}',       [AdminExtensionController::class, 'show'])   ->name('show');
+    Route::post('/{id}/approve', [AdminExtensionController::class, 'approve'])->name('approve');
+    Route::post('/{id}/reject',  [AdminExtensionController::class, 'reject']) ->name('reject');
+});
+
+// Checkout approval (Admin)
+Route::post('/tenants/{id}/approve-checkout', [AdminExtensionController::class, 'approveCheckout'])->name('tenants.approve-checkout');
 
 // ============================================================
 // 4. ERROR PAGES

@@ -151,6 +151,31 @@ $unreadComplaints = \App\Models\Complaint::where('is_read', false)->count();
                 <span class="mx-4 font-medium">Reminders</span>
             </a>
 
+            <!-- Extensions -->
+            <a href="{{ route('admin.extensions.index') }}" class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200
+                            {{ request()->routeIs('admin.extensions.*')
+    ? 'text-white bg-[#6d0000] border-[#ad3333]'
+    : 'text-gray-300 border-transparent hover:bg-[#6d0000] hover:text-white hover:border-[#ad3333]' }}">
+            
+                <svg class="w-5 h-5 group-hover:text-[#f5f5f5] transition duration-200" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+            
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            
+                <span class="mx-4 font-medium">Extensions</span>
+            
+                @php
+                    $pendingExtensions = \App\Models\Extension::where('status', 'verify')->count();
+                @endphp
+            
+                <span class="ml-auto py-0.5 px-2 bg-red-500 text-white text-xs rounded-full font-bold
+                                {{ $pendingExtensions > 0 ? 'inline-block' : 'hidden' }}">
+                    {{ $pendingExtensions > 0 ? $pendingExtensions : '' }}
+                </span>
+            </a>
+            
             <!-- Reports -->
             <a href="{{ route('reports.index') }}"
                 class="group flex items-center px-4 py-3 rounded-xl border-l-4 transition duration-200

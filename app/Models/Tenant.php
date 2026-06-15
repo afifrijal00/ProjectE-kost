@@ -60,4 +60,9 @@ public function complaints()
     return $this->hasMany(Complaint::class);
 }
 
+public function extensions()
+{
+    return $this->hasMany(Extension::class);
+}
+
 }

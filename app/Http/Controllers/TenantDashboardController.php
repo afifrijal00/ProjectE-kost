@@ -14,7 +14,7 @@ class TenantDashboardController extends Controller
         $user = Auth::user();
 
         // Cari tenant berdasarkan user login
-        $tenant = Tenant::where('user_id', $user->id)->first();
+        $tenant = Tenant::with('room')->where('user_id', $user->id)->first();
 
         // Booking user
         $booking = Booking::where('user_id', $user->id)

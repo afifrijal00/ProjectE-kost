@@ -54,6 +54,30 @@ public function edit()
         }
     }
 
+    
+
     return redirect()->route('profile.index')->with('success', 'Profil berhasil diupdate!');
 }
+
+public function updatePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => 'required',
+        'password'         => 'required|min:8|confirmed',
+    ]);
+
+    $user = Auth::user();
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Password saat ini tidak sesuai.']);
+    }
+
+    $user->update([
+        'password' => Hash::make($request->password),
+    ]);
+
+    return redirect()->route('profile.index')
+        ->with('success', 'Password berhasil diubah!');
+}
+
 }

@@ -24,6 +24,10 @@
                     <span class="bg-green-100 text-[#188C4A] px-3 py-1 rounded-full text-xs font-semibold">Active Tenant</span>
                 @elseif($tenant->status == 'pending')
                     <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">Pending Payment</span>
+                @elseif($tenant->status == 'checkout_requested')
+                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-semibold">Checkout Requested</span>
+                @elseif($tenant->status == 'inactive')
+                    <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">Inactive</span>
                 @else
                     <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">Past Tenant</span>
                 @endif
@@ -52,6 +56,21 @@
                 <a href="{{ route('tenants.contract', $tenant->id) }}" target="_blank"
                     class="block text-center mt-4 border border-[#035949] text-[#035949] hover:bg-[#035949] hover:text-white rounded-xl px-4 py-2 text-sm font-medium transition duration-200 w-full">View
                     Contract PDF</a>
+
+                    @if($tenant->status == 'checkout_requested')
+                        <div class="bg-orange-50 border border-orange-200 rounded-2xl p-6">
+                            <h3 class="font-bold text-orange-700 mb-2">Permintaan Akhiri Sewa</h3>
+                            <p class="text-sm text-orange-600 mb-4">Tenant ini telah mengajukan permintaan untuk mengakhiri sewa kamar.</p>
+                            <form action="{{ route('tenants.approve-checkout', $tenant->id) }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    onclick="return confirm('Konfirmasi checkout tenant ini? Kamar akan menjadi available kembali.')"
+                                    class="w-full bg-orange-500 text-white hover:bg-orange-600 rounded-xl px-4 py-2.5 font-bold transition">
+                                    Approve Checkout
+                                </button>
+                            </form>
+                        </div>
+                    @endif
             </div>
         </div>
 
@@ -95,30 +114,34 @@
             <div class="bg-white rounded-2xl shadow-md p-6">
                 <h3 class="font-bold text-[#012619] text-lg mb-6 pb-2 border-b border-gray-100">Payment History Timeline</h3>
 
-                <div class="relative relative-step pl-4 border-l-2 border-gray-200 space-y-6 ml-2">
+                @php
+                    $paymentHistory = $tenant->payments->whereIn('status', ['paid', 'verify'])->sortByDesc('created_at');
+                @endphp
 
-                    <div class="relative">
-                        <span class="absolute -left-[25px] bg-[#30BF62] w-3 h-3 rounded-full ring-4 ring-green-100"></span>
-                        <h4 class="font-bold text-[#012619] text-sm">March Rent Paid</h4>
-                        <p class="text-xs text-green-600 font-medium my-0.5">Rp 1,500,000</p>
-                        <span class="text-xs text-gray-400">05 Mar 2026 • via Transfer</span>
+                @if($paymentHistory->isEmpty())
+                    <p class="text-center text-gray-400 text-sm py-6">Belum ada riwayat pembayaran.</p>
+                @else
+                    <div class="relative relative-step pl-4 border-l-2 border-gray-200 space-y-6 ml-2">
+                        @foreach($paymentHistory as $payment)
+                            <div class="relative">
+                                <span
+                                    class="absolute -left-[25px] {{ $payment->status == 'paid' ? 'bg-[#30BF62] ring-green-100' : 'bg-yellow-400 ring-yellow-100' }} w-3 h-3 rounded-full ring-4"></span>
+                                <h4 class="font-bold text-[#012619] text-sm">
+                                    Invoice #{{ $payment->invoice_number }}
+                                    {{ $payment->notes ? '— ' . $payment->notes : '' }}
+                                </h4>
+                                <p
+                                    class="text-xs {{ $payment->status == 'paid' ? 'text-green-600' : 'text-yellow-600' }} font-medium my-0.5">
+                                    Rp {{ number_format($payment->amount, 0, ',', '.') }}
+                                </p>
+                                <span class="text-xs text-gray-400">
+                                    {{ ($payment->verified_at ?? $payment->created_at)->format('d M Y') }}
+                                    &middot; {{ $payment->status == 'paid' ? 'Verified' : 'Menunggu Verifikasi' }}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
-
-                    <div class="relative">
-                        <span class="absolute -left-[25px] bg-[#30BF62] w-3 h-3 rounded-full ring-4 ring-green-100"></span>
-                        <h4 class="font-bold text-[#012619] text-sm">February Rent Paid</h4>
-                        <p class="text-xs text-green-600 font-medium my-0.5">Rp 1,500,000</p>
-                        <span class="text-xs text-gray-400">03 Feb 2026 • via QRIS</span>
-                    </div>
-
-                    <div class="relative">
-                        <span class="absolute -left-[25px] bg-gray-400 w-3 h-3 rounded-full ring-4 ring-gray-100"></span>
-                        <h4 class="font-bold text-gray-600 text-sm">Initial Deposit + First Month</h4>
-                        <p class="text-xs text-gray-500 font-medium my-0.5">Rp 3,000,000</p>
-                        <span class="text-xs text-gray-400">10 Jan 2026 • Verified Admin</span>
-                    </div>
-
-                </div>
+                @endif
             </div>
         </div>
     </div>
