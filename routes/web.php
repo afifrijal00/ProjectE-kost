@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // ============================================================
-// WEBHOOK MIDTRANS (di luar auth, tidak perlu CSRF)
+// WEBHOOK MIDTRANS (di luar auth, tidak perlu CSRF) udah ga pake midtrans
 // ============================================================
 // Route::post('/payments/webhook', [TenantPaymentController::class, 'webhook'])->name('payments.webhook');
 
@@ -115,6 +115,9 @@ Route::prefix('profile')->name('profile.')->group(function () {
     Route::put('/update-password',[ProfileController::class, 'updatePassword']) ->name('update.password');
 });
 
+// --- CHECKOUT REQUEST (Tenant) ---
+Route::post('/checkout/request', [ExtensionController::class, 'requestCheckout'])->name('checkout.request');
+
 // --- EXTENSIONS (Tenant) ---
 Route::prefix('extensions')->name('extensions.')->group(function () {
     Route::get('/create',           [ExtensionController::class, 'create'])     ->name('create');
@@ -124,8 +127,7 @@ Route::prefix('extensions')->name('extensions.')->group(function () {
     Route::post('/{id}/upload-proof',[ExtensionController::class, 'storeProof']) ->name('store-proof');
 });
 
-// --- CHECKOUT REQUEST (Tenant) ---
-Route::post('/checkout/request', [ExtensionController::class, 'requestCheckout'])->name('checkout.request');
+
 
     // ============================================================
     // ADMIN ONLY ROUTES
@@ -199,16 +201,6 @@ Route::prefix('complaints')->name('admin.complaints.')->group(function () {
     Route::post('/send',    [ReminderController::class, 'send'])    ->name('send');
 });
 
-        Route::prefix('reports')->name('reports.')->group(function () {
-    Route::get('/',          [ReportController::class, 'index'])     ->name('index');
-    Route::get('/income/export-pdf', [ReportController::class, 'exportIncomePdf'])->name('income.export-pdf');
-    Route::get('/income',    [ReportController::class, 'income'])    ->name('income');
-    Route::get('/occupancy/export-pdf',  [ReportController::class, 'exportOccupancyPdf'])->name('occupancy.export-pdf');
-    Route::get('/occupancy', [ReportController::class, 'occupancy']) ->name('occupancy');
-        });
-    });
-});
-
 // Extensions (Admin)
 Route::prefix('extensions')->name('admin.extensions.')->group(function () {
     Route::get('/',           [AdminExtensionController::class, 'index'])  ->name('index');
@@ -219,6 +211,18 @@ Route::prefix('extensions')->name('admin.extensions.')->group(function () {
 
 // Checkout approval (Admin)
 Route::post('/tenants/{id}/approve-checkout', [AdminExtensionController::class, 'approveCheckout'])->name('tenants.approve-checkout');
+
+        Route::prefix('reports')->name('reports.')->group(function () {
+    Route::get('/',          [ReportController::class, 'index'])     ->name('index');
+    Route::get('/income/export-pdf', [ReportController::class, 'exportIncomePdf'])->name('income.export-pdf');
+    Route::get('/income',    [ReportController::class, 'income'])    ->name('income');
+    Route::get('/occupancy/export-pdf',  [ReportController::class, 'exportOccupancyPdf'])->name('occupancy.export-pdf');
+    Route::get('/occupancy', [ReportController::class, 'occupancy']) ->name('occupancy');
+        });
+    });
+});
+
+
 
 // ============================================================
 // 4. ERROR PAGES
