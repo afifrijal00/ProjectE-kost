@@ -5,16 +5,16 @@
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div class="bg-white rounded-2xl shadow-md p-6 border-l-4 border-yellow-400">
-            <h3 class="text-gray-500 text-sm font-medium">Pending Verifications</h3>
+            <h3 class="text-gray-500 text-sm font-medium">Menunggu Verifikasi</h3>
             <p class="text-2xl font-bold text-[#012619] mt-1">{{ $pendingCount }} <span
-                    class="text-sm font-normal text-gray-500">tickets</span></p>
+                    class="text-sm font-normal text-gray-500">tagihan</span></p>
         </div>
         <div class="bg-white rounded-2xl shadow-md p-6 border-l-4 border-[#30BF62]">
-            <h3 class="text-gray-500 text-sm font-medium">Verified This Month</h3>
+            <h3 class="text-gray-500 text-sm font-medium">Terverifikasi Bulan Ini</h3>
             <p class="text-2xl font-bold text-[#012619] mt-1">Rp {{ number_format($verifiedTotal, 0, ',', '.') }}</p>
         </div>
         <div class="bg-white rounded-2xl shadow-md p-6 border-l-4 border-red-500">
-            <h3 class="text-gray-500 text-sm font-medium">Overdue Payments</h3>
+            <h3 class="text-gray-500 text-sm font-medium">Pembayaran Terlambat</h3>
             <p class="text-2xl font-bold text-[#012619] mt-1">{{ $overdueCount }} <span
                     class="text-sm font-normal text-gray-500">tenant</span></p>
         </div>
@@ -23,7 +23,7 @@
     <div class="bg-white rounded-2xl shadow-md overflow-hidden">
         <div class="p-6 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
             <form method="GET" action="{{ route('admin.payments.index') }}" class="relative w-full sm:w-64">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search invoice/tenant..."
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari tagihan atau tenant..."
                     class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:ring-[#30BF62] focus:border-[#30BF62] text-sm">
                 <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -34,11 +34,11 @@
                 <form method="GET" action="{{ route('admin.payments.index') }}">
                     <select name="status" onchange="this.form.submit()"
                         class="border border-gray-300 rounded-xl px-4 py-2 text-sm focus:ring-[#30BF62]">
-                        <option value="">All Status</option>
-                        <option value="verify" {{ request('status') == 'verify' ? 'selected' : '' }}>Pending Verify</option>
-                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Paid</option>
-                        <option value="overdue" {{ request('status') == 'overdue' ? 'selected' : '' }}>Overdue</option>
-                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="">Semua status</option>
+                        <option value="verify" {{ request('status') == 'verify' ? 'selected' : '' }}>Menunggu verifikasi</option>
+                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Sudah dibayar</option>
+                        <option value="overdue" {{ request('status') == 'overdue' ? 'selected' : '' }}>Terlambat</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu Pembayaran</option>
                     </select>
                 </form>
             </div>
@@ -48,12 +48,12 @@
             <table class="w-full whitespace-nowrap">
                 <thead class="bg-[#400000] text-white text-left text-sm uppercase font-semibold">
                     <tr>
-                        <th class="px-6 py-4">Invoice ID</th>
+                        <th class="px-6 py-4">ID TAGIhan</th>
                         <th class="px-6 py-4">Tenant</th>
-                        <th class="px-6 py-4">Amount</th>
-                        <th class="px-6 py-4">Due Date</th>
+                        <th class="px-6 py-4">Jumlah Tagihan</th>
+                        <th class="px-6 py-4">JATUH TEMPO</th>
                         <th class="px-6 py-4">Status</th>
-                        <th class="px-6 py-4 text-center">Action</th>
+                        <th class="px-6 py-4 text-center">AKSI</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm text-gray-700">

@@ -5,8 +5,8 @@
 <div class="min-h-[calc(100vh-64px)] flex bg-[#f5e6e6] py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl w-full mx-auto bg-white rounded-2xl shadow-md p-8 sm:p-10">
         <div class="text-center mb-10">
-            <h1 class="text-3xl font-bold text-[#012619]">Create an Account</h1>
-            <p class="text-gray-500 mt-2">Join e-Kost to find your perfect room or manage your property.</p>
+            <h1 class="text-3xl font-bold text-[#012619]">Buat Akun</h1>
+            <p class="text-gray-500 mt-2">Temukan kamar kos yang sesuai dengan kebutuhan Anda atau kelola properti dengan mudah, cepat, dan terpercaya bersama e-Kost.</p>
         </div>
         
         <form action="{{ route('register.post') }}" method="POST" class="space-y-6">
@@ -24,32 +24,32 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                    <input type="text" name="first_name" value="{{ old('first_name') }}" placeholder="John" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Depan</label>
+                    <input type="text" name="first_name" value="{{ old('first_name') }}" placeholder="Awan" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                    <input type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Doe" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Belakang</label>
+                    <input type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Parker" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                <input type="email" name="email" value="{{ old('email') }}" placeholder="john.doe@example.com" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Alamat Email</label>
+                <input type="email" name="email" value="{{ old('email') }}" placeholder="awantukam@contoh.com" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
                 <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="+62 812 3456 7890" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi</label>
                     <input type="password" name="password" placeholder="••••••••" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Kata Sandi</label>
                     <input type="password" name="password_confirmation" placeholder="••••••••" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-[#30BF62] focus:border-transparent transition" required>
                 </div>
             </div>
@@ -62,12 +62,12 @@
             </div>
 
             <button type="submit" class="w-full bg-[#30BF62] text-white hover:bg-[#188C4A] rounded-xl px-4 py-3 font-semibold transition duration-200">
-                Create Account
+                Buat Akun
             </button>
         </form>
 
         <p class="text-center text-sm text-gray-500 mt-8">
-            Already have an account? <a href="{{ route('login') }}" class="text-[#188C4A] hover:text-[#035949] font-medium transition">Sign in</a>
+            Sudah punya akun? <a href="{{ route('login') }}" class="text-[#188C4A] hover:text-[#035949] font-medium transition">Masuk</a>
         </p>
     </div>
 </div>

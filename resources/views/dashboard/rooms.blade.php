@@ -9,17 +9,17 @@
         <div class="flex space-x-2 w-full sm:w-auto mb-4 sm:mb-0">
             <form method="GET" action="{{ route('dashboard.rooms') }}">
         <select name="status" onchange="this.form.submit()" class="border border-gray-300 rounded-xl px-4 py-2 focus:ring-[#30BF62] focus:border-[#30BF62] text-sm">
-            <option value="">All Status</option>
-            <option value="available"    {{ request('status') == 'available' ? 'selected' : '' }}>Available</option>
-            <option value="occupied"     {{ request('status') == 'occupied' ? 'selected' : '' }}>Occupied</option>
-            <option value="maintenance"  {{ request('status') == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
+            <option value="">Semua status</option>
+            <option value="available"    {{ request('status') == 'available' ? 'selected' : '' }}>Tersedia</option>
+            <option value="occupied"     {{ request('status') == 'occupied' ? 'selected' : '' }}>Ditempati</option>
+            <option value="maintenance"  {{ request('status') == 'maintenance' ? 'selected' : '' }}>Perbaikan</option>
         </select>
     </form>
         </div>
 
         <a href="{{ route('dashboard.rooms.form') }}" class="bg-[#ad3333] text-white hover:bg-[#400000] rounded-xl px-4 py-2 font-medium transition duration-200 shadow-sm flex items-center w-full sm:w-auto justify-center">
             <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            Add New Room
+            Tambah kamar baru
         </a>
     </div>
 

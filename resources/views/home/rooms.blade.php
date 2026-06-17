@@ -9,21 +9,21 @@
             <!-- Header & Filter Bar -->
             <div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <h1 class="text-3xl font-bold text-[#012619]">Available Rooms</h1>
+                    <h1 class="text-3xl font-bold text-[#012619]">Kamar Tersedia</h1>
                     <p class="text-gray-500 mt-1">Showing {{ $rooms->total() }} results</p>
                 </div>
                 <form method="GET" action="{{ route('rooms') }}" class="flex space-x-2">
                     <select name="type" onchange="this.form.submit()"
                         class="border border-gray-300 rounded-xl px-4 py-2 focus:ring-[#30BF62] focus:border-[#30BF62] text-sm">
-                        <option value="">All Types</option>
+                        <option value="">Semua tipe</option>
                         <option value="Regular" {{ request('type') == 'Regular' ? 'selected' : '' }}>Regular</option>
                         <option value="VIP" {{ request('type') == 'VIP' ? 'selected' : '' }}>VIP</option>
                         <option value="Suite" {{ request('type') == 'Suite' ? 'selected' : '' }}>Suite</option>
                     </select>
                     <select name="sort" onchange="this.form.submit()"
                         class="border border-gray-300 rounded-xl px-4 py-2 focus:ring-[#30BF62] focus:border-[#30BF62] text-sm">
-                        <option value="lowest" {{ request('sort') == 'lowest' ? 'selected' : '' }}>Lowest Price</option>
-                        <option value="highest" {{ request('sort') == 'highest' ? 'selected' : '' }}>Highest Price</option>
+                        <option value="lowest" {{ request('sort') == 'lowest' ? 'selected' : '' }}>Harga Terendah</option>
+                        <option value="highest" {{ request('sort') == 'highest' ? 'selected' : '' }}>Harga Tertinggi</option>
                     </select>
                 </form>
             </div>

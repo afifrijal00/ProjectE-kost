@@ -9,7 +9,7 @@
             <div class="p-6 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div class="relative w-full sm:w-64">
                     <form method="GET" action="{{ route('tenants.index') }}" class="relative w-full sm:w-64">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search tenant..."
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari tenant..."
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:ring-[#30BF62] focus:border-[#30BF62] transition text-sm">
                         <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -21,14 +21,14 @@
                 <div class="flex gap-2 w-full sm:w-auto">
                     <select name="status" onchange="this.form.submit()" form="filter-form"
                         class="border border-gray-300 rounded-xl px-4 py-2 text-sm focus:ring-[#30BF62]">
-                        <option value="">All Status</option>
-                        <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
-                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="past" {{ request('status') == 'past' ? 'selected' : '' }}>Past</option>
+                        <option value="">Semua status</option>
+                        <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu konfirmasi</option>
+                        <option value="past" {{ request('status') == 'past' ? 'selected' : '' }}>Tenant keluar</option>
                     </select>
                     <form id="filter-form" method="GET" action="{{ route('tenants.index') }}"></form>
                     <a href="{{ route('tenants.create') }}" class="bg-[#ad3333] text-white hover:bg-[#400000] rounded-xl px-4 py-2 text-sm font-medium transition shadow-sm flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg> Add Tenant
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg> Tambah tenant
                     </a>
                 </div>
             </div>
@@ -38,9 +38,9 @@
                 <table class="w-full whitespace-nowrap">
                     <thead class="bg-[#400000] text-white text-left text-sm uppercase font-semibold">
                         <tr>
-                            <th class="px-6 py-4 rounded-tl-xl sm:rounded-none">Tenant Name</th>
-                            <th class="px-6 py-4">Room</th>
-                            <th class="px-6 py-4">Contract End</th>
+                            <th class="px-6 py-4 rounded-tl-xl sm:rounded-none">Nama Tenant</th>
+                            <th class="px-6 py-4">Kamar</th>
+                            <th class="px-6 py-4">Masa Sewa</th>
                             <th class="px-6 py-4">Status</th>
                             <th class="px-6 py-4 text-center">Actions</th>
                         </tr>

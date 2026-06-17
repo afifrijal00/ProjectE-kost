@@ -73,7 +73,7 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Stay Duration</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Stay Durationn</label>
                         <select name="duration"
                             class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-[#30BF62] focus:border-[#30BF62]">
                             <option value="1" {{ old('duration', $tenant->duration) == 1 ? 'selected' : '' }}>1 Month</option>

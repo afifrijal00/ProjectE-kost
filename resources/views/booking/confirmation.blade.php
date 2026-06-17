@@ -18,11 +18,11 @@
 
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 mb-8 max-w-sm mx-auto text-left">
                     <div class="flex justify-between mb-2">
-                        <span class="text-gray-500 text-sm">Booking ID</span>
+                        <span class="text-gray-500 text-sm">ID Booking</span>
                         <span class="font-bold text-[#012619] text-sm">#{{ $booking->booking_code }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
-                        <span class="text-gray-500 text-sm">Room</span>
+                        <span class="text-gray-500 text-sm">Kamar</span>
                         <span class="font-bold text-[#012619] text-sm">{{ $booking->room->type }} Room
                             {{ $booking->room->room_number }}</span>
                     </div>

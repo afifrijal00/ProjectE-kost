@@ -45,7 +45,7 @@
                             <div>
                                 <h4 class="font-semibold text-[#012619]">Alamat</h4>
                                 <p class="text-gray-600">
-                                    Jl. Kost Nyaman No. 12, Purwokerto
+                                    Red Dragon Kost - Jl. DI Panjaitan, Purwokerto.
                                 </p>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                             </label>
 
                             <input type="text" name="name" value="{{ old('name') }}"
-                                class="w-full rounded-xl border-gray-300 focus:border-[#30BF62] focus:ring-[#30BF62]"
+                                class="w-full border-2 border-gray-400 rounded-xl px-4 py-3 focus:border-[#400000] focus:ring-2 focus:ring-[#400000] focus:outline-none"
                                 required>
 
                             @error('name')
@@ -111,7 +111,7 @@
                             </label>
 
                             <input type="email" name="email" value="{{ old('email') }}"
-                                class="w-full rounded-xl border-gray-300 focus:border-[#30BF62] focus:ring-[#30BF62]"
+                                class="w-full border-2 border-gray-400 rounded-xl px-4 py-3 focus:border-[#400000] focus:ring-2 focus:ring-[#400000] focus:outline-none"
                                 required>
 
                             @error('email')
@@ -125,7 +125,7 @@
                             </label>
 
                             <textarea name="message" rows="5"
-                                class="w-full rounded-xl border-gray-300 focus:border-[#30BF62] focus:ring-[#30BF62]"
+                                class="w-full border-2 border-gray-400 rounded-xl px-4 py-3 focus:border-[#400000] focus:ring-2 focus:ring-[#400000] focus:outline-none"
                                 required>{{ old('message') }}</textarea>
 
                             @error('message')
@@ -134,7 +134,7 @@
                         </div>
 
                         <button type="submit"
-                            class="w-full bg-[#30BF62] hover:bg-[#188C4A] text-white font-semibold py-3 rounded-xl transition duration-200">
+                            class="w-full bg-[#ad3333] hover:bg-[#400000] text-white font-semibold py-3 rounded-xl transition duration-200">
                             Kirim Pesan
                         </button>
                     </form>

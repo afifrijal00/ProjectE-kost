@@ -6,7 +6,7 @@
     <div class="bg-white rounded-2xl shadow-md overflow-hidden">
         <div class="p-6 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
             <form method="GET" action="{{ route('admin.bookings.index') }}" class="relative w-full sm:w-64">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search booking/tenant..."
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari booking/tenant..."
                     class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:ring-[#30BF62] focus:border-[#30BF62] text-sm">
                 <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
@@ -18,10 +18,10 @@
                 <select name="status" onchange="this.form.submit()"
                     class="border border-gray-300 rounded-xl px-4 py-2 text-sm focus:ring-[#30BF62]">
                     <option value="">All Status</option>
-                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="dp_paid" {{ request('status') == 'dp_paid' ? 'selected' : '' }}>DP Paid</option>
-                    <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Approved</option>
-                    <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu Konfirmasi</option>
+                    <option value="dp_paid" {{ request('status') == 'dp_paid' ? 'selected' : '' }}>Sudah DP</option>
+                    <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Disetujui</option>
+                    <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Ditolak</option>
                 </select>
             </form>
         </div>
@@ -30,11 +30,11 @@
             <table class="w-full whitespace-nowrap">
                 <thead class="bg-[#400000] text-white text-left text-sm uppercase font-semibold">
                     <tr>
-                        <th class="px-6 py-4">Booking ID</th>
+                        <th class="px-6 py-4">ID Booking</th>
                         <th class="px-6 py-4">Tenant</th>
-                        <th class="px-6 py-4">Room</th>
-                        <th class="px-6 py-4">Duration</th>
-                        <th class="px-6 py-4">DP Amount</th>
+                        <th class="px-6 py-4">Kamar</th>
+                        <th class="px-6 py-4">Masa sewa</th>
+                        <th class="px-6 py-4">Jumlah DP</th>
                         <th class="px-6 py-4">Status</th>
                         <th class="px-6 py-4 text-center">Action</th>
                     </tr>

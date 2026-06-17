@@ -41,7 +41,8 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-[#400000]">Kamar Kosong, Gas Booking!</h2>
-                    <p class="text-gray-600 mt-2 text-lg">Don't sleep on this! Grab your room before someone else does.</p>
+                    <p class="text-gray-600 mt-2 text-lg">Jangan sampai kehabisan! Temukan dan pesan kamar pilihan Anda sebelum disewa oleh penghuni lain.
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -116,7 +117,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-[#400000]">High-Speed WiFi</h4>
+                        <h4 class="font-semibold text-[#400000]">Wifi Kencang</h4>
                     </div>
                     <div class="flex flex-col items-center" data-aos="fade-up" data-aos-delay="100">
                         <div class="w-20 h-20 bg-[#F5E6E6] rounded-full flex items-center justify-center text-[#400000] mb-4 shadow-md">
@@ -124,7 +125,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-[#400000]">24/7 Security CCTV</h4>
+                        <h4 class="font-semibold text-[#400000]">Keamanan CCTV</h4>
                     </div>
                     <div class="flex flex-col items-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="w-20 h-20 bg-[#F5E6E6] rounded-full flex items-center justify-center text-[#400000] mb-4 shadow-md">
@@ -132,7 +133,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-[#400000]">Communal Area</h4>
+                        <h4 class="font-semibold text-[#400000]">Parkir Luas</h4>
                     </div>
                     <div class="flex flex-col items-center" data-aos="fade-up" data-aos-delay="300">
                         <div class="w-20 h-20 bg-[#F5E6E6] rounded-full flex items-center justify-center text-[#400000] mb-4 shadow-md">
@@ -140,7 +141,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-[#400000]">Kitchen & Pantry</h4>
+                        <h4 class="font-semibold text-[#400000]">Dapur Bersama</h4>
                     </div>
                 </div>
             </div>
@@ -151,16 +152,16 @@
         <div class="bg-[#400000] py-16">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
                 <h2 class="text-3xl font-extrabold text-white mb-4">
-                    Ready to move in?
+                    Siap Menemukan Hunian yang Tepat?
                 </h2>
 
                 <p class="text-white opacity-90 mb-8 text-lg">
-                    Join dozens of happy tenants experiencing quality living today.
+                    Bergabunglah sekarang dan temukan kamar kos yang nyaman, aman, dan sesuai dengan kebutuhan Anda.
                 </p>
 
                 <a href="{{ route('register') }}"
                    class="bg-white text-[#012619] px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-gray-100 transition duration-200 inline-block">
-                    Create an Account
+                    Daftar Sekarang
                 </a>
             </div>
         </div>
