@@ -38,6 +38,9 @@ Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post
 Route::view('/register', 'auth.register')->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // 2.1 EMAIL VERIFICATION
